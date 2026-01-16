@@ -21,8 +21,9 @@ public class MovieController {
     }
 
     //POST request - /movies/add
-    @PostMapping("addnew")
-    public void AddNewMovie(){
+    @PostMapping("/")
+    public String AddNewMovie(){
         // add new movie in database
+        return "Add new movie";
     }
 }
