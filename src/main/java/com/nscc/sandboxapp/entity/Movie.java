@@ -13,6 +13,6 @@ public class Movie {
     @Column(nullable = false) // NOT NULL in database
     private String Title;
 
-    @Column(nullable = false, length = 1000) // NOT NULL in database, max characters
+    @Column(nullable = false, length = 1000) // NOT NULL in database, max characters 1000
     private String synopsis;
 }
