@@ -1,7 +1,8 @@
 package com.nscc.sandboxapp.controller;
-
+import com.nscc.sandboxapp.dto.MovieCreateDTO;
 import com.nscc.sandboxapp.entity.Movie;
 import com.nscc.sandboxapp.service.MovieService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -31,16 +32,22 @@ public class MovieController {
     @GetMapping("/{id}")
     public Movie GetMovieById(@PathVariable long id){
         // Optional<Movie> allows us to throw an exception not found
-
         return movieService.getMovieById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         // get movie in database with pk = id
     }
 
     //POST request - /movies/add
+    // @Valid: automatically validates input
+    // @RequestBody: binds the POST request cody to movie
     @PostMapping("/")
-    public String AddNewMovie(){
+    @ResponseStatus(HttpStatus.CREATED) //HTTP Status code: 201
+    public Movie CreateMovie(@Valid @RequestBody MovieCreateDTO movieDTO){
         // add new movie in database
-        return "Add new movie";
+        Movie movie = new Movie();
+        movie.setTitle(movieDTO.getTitle());
+        movie.setSynopsis(movieDTO.getSynopsis());
+
+        return movieService.createMovie(movie);
     }
 }
