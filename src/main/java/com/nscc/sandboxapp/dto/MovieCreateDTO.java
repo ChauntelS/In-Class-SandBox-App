@@ -10,7 +10,7 @@ public class MovieCreateDTO {
 
     @NotNull // controller validation
     @NotBlank(message ="Title is required.") // controller validation
-    private String Title;
+    private String title;
 
     @NotNull
     @NotBlank(message ="Synopsis is required.")
